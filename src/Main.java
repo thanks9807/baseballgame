@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 public class Main {
     public static void main(String[] args) {
         System.out.println("숫자 야구");
@@ -30,8 +31,12 @@ public class Main {
             //player 입력 받기.
             System.out.println("숫자를 입력해주세요");
             int player_input = 0;
-            player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
-
+            try {
+                player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
+            }catch (InputMismatchException e){
+                System.out.println("Int 범위를 넘은 값입니다.");
+                break;
+            }
             // 역순으로 저장된다. ex) 123 -> 321
             // 1의 자리부터 list에 추가한다.  다양한 자료구조의 차이를 알아야한다.
 
@@ -83,6 +88,6 @@ public class Main {
             }
         }// while( strake == size)
 
-        System.out.println("정답입니다. 끝");
+        System.out.println("끝");
     }//main 끝
 }
