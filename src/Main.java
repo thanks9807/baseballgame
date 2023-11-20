@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 public class Main {
     public static void main(String[] args) {
         System.out.println("숫자 야구");
@@ -14,11 +15,11 @@ public class Main {
         int ball = 0;
         Scanner sc = new Scanner(System.in);
         List<Integer> player = new ArrayList<>();
-
+        Home_team home_team = new Home_team();
         Away_team away_team = new Away_team(size);
 
 
-//        away_team.printlist(); //답안지
+        away_team.printlist(); //답안지
 
         //게임 시작!
         while(strake != size){
@@ -31,12 +32,8 @@ public class Main {
             int player_input = 0;
             player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
 
-
-
-
             // 역순으로 저장된다. ex) 123 -> 321
             // 1의 자리부터 list에 추가한다.  다양한 자료구조의 차이를 알아야한다.
-
 
             while (player_input != 0) {
                 int n = player_input%10;
@@ -58,21 +55,19 @@ public class Main {
                 continue;
             }
 
+            //player List를 유저가 입력한 순서로 바꿈
+            Collections.reverse(player);
 
-            //플레이어가 입력한 숫자입니다.
-            System.out.println("플레이어가 입력한 숫자입니다.");
-            for (int i = player.size() - 1; i >= 0;i--){
-                System.out.print(player.get(i));
-            }
-            System.out.print("\n");
+            home_team.setList(player);
+            home_team.printList();
 
             //결과 판독
             for(int i = 0 ; i< size;i++) {
-                if (away_team.numberlist.get(i) == player.get(size-i-1)) {
+                if (away_team.numberlist.get(i) == home_team.numberlist.get(i)) {
                     //System.out.println("Strlike!");
                     strake++;
                 }
-                else if(away_team.numberlist.contains(player.get(size-i-1))){
+                else if(away_team.numberlist.contains(home_team.numberlist.get(i))){
                     //System.out.println("BALL.");
                     ball++;
                 }
@@ -87,9 +82,7 @@ public class Main {
                 System.out.println("B : " + ball);
             }
         }// while( strake == size)
+
         System.out.println("정답입니다. 끝");
     }//main 끝
-
-
-
 }

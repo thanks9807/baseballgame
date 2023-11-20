@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Away_team {
     List<Integer> numberlist = new ArrayList<>();
     public Away_team(int size){
+        System.out.println("Away 측이 숫자를 생성합니다.");
         Random random = new Random(); // 랜덤 객체 생성
         random.setSeed(System.currentTimeMillis());
 
@@ -14,7 +15,7 @@ public class Away_team {
                 numberlist.add(randomNumber);
             }
         }
-
+        System.out.println("Away 측이 숫자를 정했습니다.");
     }
 
     public void printlist(){
