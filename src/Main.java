@@ -3,38 +3,23 @@
 //사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
 import java.util.Scanner;
-import java.util.Random;
+
 import java.util.List;
 import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         System.out.println("숫자 야구");
         int size = 3; //숫자 자리 수
-        int num1 = 0 ;
         int strake = 0;
         int ball = 0;
         Scanner sc = new Scanner(System.in);
         List<Integer> player = new ArrayList<>();
 
-        // 상대방 (컴퓨터) 숫자 생성
-        Random random = new Random(); // 랜덤 객체 생성
-        random.setSeed(System.currentTimeMillis());
+        Away_team away_team = new Away_team(size);
 
-        List<Integer> computer = new ArrayList<>();
-        while (computer.size() < size) {
-            int randomNumber = random.nextInt(9);
-            if (randomNumber != 0 && !computer.contains(randomNumber)) { // 0이랑 숫자 중복 막음.
-                computer.add(randomNumber);
-            }
-        }
-/*
-        //상대방의 숫자 출력
-        System.out.print("상대방의 숫자입니다.");
-        for (int i = 0; i < computer.size();i++) {
-            System.out.print(computer.get(i));
-        }
-        System.out.print("\n");
-*/
+
+//        away_team.printlist(); //답안지
+
         //게임 시작!
         while(strake != size){
             strake = 0;
@@ -83,11 +68,11 @@ public class Main {
 
             //결과 판독
             for(int i = 0 ; i< size;i++) {
-                if (computer.get(i) == player.get(size-i-1)) {
+                if (away_team.numberlist.get(i) == player.get(size-i-1)) {
                     //System.out.println("Strlike!");
                     strake++;
                 }
-                else if(computer.contains(player.get(size-i-1))){
+                else if(away_team.numberlist.contains(player.get(size-i-1))){
                     //System.out.println("BALL.");
                     ball++;
                 }
