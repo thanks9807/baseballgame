@@ -1,6 +1,7 @@
-//camp.nextstep.edu.missionutils에서 제공하는 Randoms 및 Console API를 사용하여 구현해야 한다.
-//Random 값 추출은 camp.nextstep.edu.missionutils.Randoms의 pickNumberInRange()를 활용한다.
-//사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 
 import java.util.Scanner;
 
@@ -10,6 +11,21 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 public class Main {
     public static void main(String[] args) {
+
+        try(ServerSocket server = new ServerSocket(9807)){
+            while(true){
+                System.out.println("연결 대기 중");
+                Socket connection = server.accept();
+                Thread task = new ServerSocketThread(connection);
+                task.start();
+            }
+        }catch(IOException e){
+         //   logger.error(e);
+        }
+
+
+        Thread clientThread = new Thread(new Client());
+
         System.out.println("숫자 야구");
         int size = 3; //숫자 자리 수
         int strake = 0;
