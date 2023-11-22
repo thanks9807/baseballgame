@@ -18,9 +18,9 @@ public class Main {
                 System.out.println("연결 대기 중");
                 Socket connection = server.accept();
                 Thread task = new ServerSocketThread(connection,client);
-                task.start();
+                Thread game = new BaseBallGame(client);
 
-                BaseBallGame game = new BaseBallGame(client);
+                task.start();
                 game.start();
             }
         }catch(IOException e){

@@ -24,12 +24,10 @@ public class ServerSocketThread extends Thread {
 
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             pw = new PrintWriter(socket.getOutputStream());
-            UserInputChecker userInputChecker = new UserInputChecker(br);
-            // 클라이언트에서 보낸 문자열 출력
-            System.out.println(br.readLine());
+
 
             // 클라이언트에 문자열 전송
-            pw.println("수신되었다. 오버");
+            pw.println("안녕하세요, 야구게임 서버입니다.");
             pw.flush();
 
             //연결이 확인된 이후 연결이 끊기면 안된다.
@@ -41,8 +39,10 @@ public class ServerSocketThread extends Thread {
                 String str = null; // 입력이 들어올 때까지 대기한다.
                 str = br.readLine(); // 입력이 들어올 때까지 대기한다.
                 System.out.println("Client : " + str);
-                client.setClientInput(str);
+                client.setClientInput(str);//Client Input 처리해줘.
 
+                pw.println(client.getMsg());//처리 후 대답
+                pw.flush();
             }
 
         }catch(IOException e){

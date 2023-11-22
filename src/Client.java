@@ -8,7 +8,7 @@ public class Client {
 
     public synchronized void setClientInput(String clientInput) {
         if(this.isReadclientInput == false){
-            System.out.println("아직 읽지 않은 입력값이 있습니다.");
+            System.out.println("아직 읽지 않은 입력이 있습니다.");
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -16,7 +16,7 @@ public class Client {
             }
         }
 
-        System.out.println("유저 입력값이 있습니다.");
+        System.out.println("유저 입력이 있습니다.");
         this.clientInput = clientInput;
         this.isReadclientInput = false;
         notify();
@@ -38,7 +38,7 @@ public class Client {
     }
     public synchronized String getClientInput(){
         if(this.isReadclientInput == true){
-            System.out.println("이미 읽은 입력값입니다. 새로운 값이 있을 때까지 대기합니다.");
+            System.out.println("새로운 값이 있을 때까지 대기합니다.");
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -53,7 +53,7 @@ public class Client {
     }
     public synchronized String getMsg() {
         if(this.isReadMsg == true){
-            System.out.println("이미 읽은 메시지입니다. 새로운 값이 있을 때까지 대기합니다.");
+            System.out.println("새로운 값이 있을 때까지 대기합니다.");
             try {
                 wait();
             } catch (InterruptedException e) {
