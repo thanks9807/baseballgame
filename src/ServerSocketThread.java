@@ -41,14 +41,9 @@ public class ServerSocketThread extends Thread {
                 String str = null; // 입력이 들어올 때까지 대기한다.
                 str = br.readLine(); // 입력이 들어올 때까지 대기한다.
 
-                if(str == null){
-                    //System.out.println("아무말도 없네요.");
 
-                }
-                else{
-                    //client.setClientInput(str);
-                    System.out.println(str);
-                }
+                System.out.println("Client : " + str);
+
             }
 
         }catch(IOException e){

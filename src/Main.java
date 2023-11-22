@@ -44,7 +44,7 @@ public class Main {
 
             //player 입력 받기.
             System.out.println("숫자를 입력해주세요");
-            client.setMsg("숫자를 입력해주세요");
+            //client.setMsg("숫자를 입력해주세요");
             int player_input = 0;
             try {
                 //player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
