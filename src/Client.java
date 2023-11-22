@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Client {
     public Client() {
-        isReadclientInput = false;
-        isReadMsg = false;
+        isReadclientInput = true;
+        isReadMsg = true;
     }
 
     public synchronized void setClientInput(String clientInput) {

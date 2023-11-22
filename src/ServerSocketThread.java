@@ -40,9 +40,8 @@ public class ServerSocketThread extends Thread {
                 System.out.println("입력을 기다리는 중입니다.");
                 String str = null; // 입력이 들어올 때까지 대기한다.
                 str = br.readLine(); // 입력이 들어올 때까지 대기한다.
-
-
                 System.out.println("Client : " + str);
+                client.setClientInput(str);
 
             }
 
