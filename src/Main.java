@@ -11,20 +11,18 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 public class Main {
     public static void main(String[] args) {
-
+        Client client = new Client();
         try(ServerSocket server = new ServerSocket(9807)){
             while(true){
                 System.out.println("연결 대기 중");
                 Socket connection = server.accept();
-                Thread task = new ServerSocketThread(connection);
+                Thread task = new ServerSocketThread(connection,client);
                 task.start();
             }
         }catch(IOException e){
          //   logger.error(e);
         }
 
-
-        Thread clientThread = new Thread(new Client());
 
         System.out.println("숫자 야구");
         int size = 3; //숫자 자리 수
@@ -46,9 +44,11 @@ public class Main {
 
             //player 입력 받기.
             System.out.println("숫자를 입력해주세요");
+            client.setMsg("숫자를 입력해주세요");
             int player_input = 0;
             try {
-                player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
+                //player_input = sc.nextInt(); //Scanner 이용해서 player 입력값 받기
+                player_input = Integer.parseInt(client.getClientInput());
             }catch (InputMismatchException e){
                 System.out.println("Int 범위를 넘은 값입니다.");
                 break;

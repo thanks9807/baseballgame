@@ -6,9 +6,11 @@ import java.net.Socket;
 
 public class ServerSocketThread extends Thread {
     private Socket socket;
-
-    public ServerSocketThread(Socket connection) {
+    private Client client;
+    public ServerSocketThread(Socket connection,Client client) {
         this.socket = connection;
+        this.client = client;
+
     }
 
 
@@ -20,14 +22,9 @@ public class ServerSocketThread extends Thread {
             String connIp = socket.getInetAddress().getHostAddress();
             System.out.println(connIp + "에서 연결 시도.");
 
-            /*
-             * 접근한 소켓 계정의 ip를 체크한다. KTOA 연동 모듈인지 체크
-             * 정상이면 먼저 정상 접근되었음을 알린다.
-             **/
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
             pw = new PrintWriter(socket.getOutputStream());
-
+            UserInputChecker userInputChecker = new UserInputChecker(br);
             // 클라이언트에서 보낸 문자열 출력
             System.out.println(br.readLine());
 
@@ -37,23 +34,26 @@ public class ServerSocketThread extends Thread {
 
             //연결이 확인된 이후 연결이 끊기면 안된다.
             while(true){
-                Thread.sleep(1000);
-                System.out.println("연결은 유지 중입니다.");
-                String str = br.readLine(); // 왜 여기서 멈출까?
+                //System.out.println("연결은 유지 중입니다.");
+                //System.out.println(client.getMsg());
+
+                System.out.println("입력을 기다리는 중입니다.");
+                String str = null; // 입력이 들어올 때까지 대기한다.
+                str = br.readLine(); // 입력이 들어올 때까지 대기한다.
+
                 if(str == null){
-                    System.out.println("아무말도 없네요.");
+                    //System.out.println("아무말도 없네요.");
 
                 }
                 else{
+                    //client.setClientInput(str);
                     System.out.println(str);
                 }
             }
 
         }catch(IOException e){
-            //logger.error(e);
-        } catch (InterruptedException e) { //sleep에 필요
-            throw new RuntimeException(e);
-        } finally{
+            System.out.println(e.getMessage());
+        }finally{
             try{
                 if(pw != null) { pw.close();}
                 if(br != null) { br.close();}
